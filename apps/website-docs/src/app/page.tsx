@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Main() {
   return (
     <div className="container">
@@ -13,7 +15,9 @@ export default function Main() {
       </p>
       <div className="flex">
         <button className="btn-primary">
-          <a href="/docs/installation">Get Started &#8594;</a>
+          <Link href="/docs/installation" prefetch>
+            Get Started &#8594;
+          </Link>
         </button>
         <button className="btn-secondary">
           <a
