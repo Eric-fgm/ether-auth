@@ -16,7 +16,13 @@ export default function Main() {
           <a href="/docs/installation">Get Started &#8594;</a>
         </button>
         <button className="btn-secondary">
-          <a href="">Source Code &#10003;</a>
+          <a
+            href="https://github.com/Eric-fgm/ether-auth"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Source Code &#10003;
+          </a>
         </button>
       </div>
     </div>
