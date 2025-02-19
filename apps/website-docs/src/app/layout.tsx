@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Footer, Layout, Navbar } from "nextra-theme-docs";
 import { Banner, Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
@@ -92,7 +93,7 @@ export default async function RootLayout({
             <Footer>MIT {new Date().getFullYear()} © Ether Auth.</Footer>
           }
         >
-          {children}
+          <Suspense fallback={<div className="loader" />}>{children}</Suspense>
         </Layout>
       </body>
     </html>

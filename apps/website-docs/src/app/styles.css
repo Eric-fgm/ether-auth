@@ -73,3 +73,7 @@
   line-height: 1.6;
   max-width: 600px;
 }
+
+.loader {
+  min-height: 100vh;
+}
