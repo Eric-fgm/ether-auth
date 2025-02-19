@@ -1,6 +1,6 @@
 # Ether Auth
 
-![License](https://img.shields.io/github/license/your-repo/ether-auth)
+![License](https://img.shields.io/github/license/Eric-fgm/ether-auth)
 ![Version](https://img.shields.io/npm/v/ether-auth)
 ![Build Status](https://img.shields.io/github/actions/workflow/status/your-repo/ether-auth/build.yml)
 
@@ -50,8 +50,9 @@ app.use(
 const { getSession } = expressAuth(...)
 
 app.get("/dashboard", async (req, res) => {
-  const { user } = await getSession(req, res);
-  ...
+  const session = await getSession(req, res);
+  console.log(session?.user);
+  //...
 });
 ```
 

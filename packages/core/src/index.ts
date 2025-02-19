@@ -13,7 +13,7 @@ import type {
   MagicLinkProvider,
   OAuthProvider,
 } from "./providers";
-import type { Config, RequestInternal, User } from "./types";
+import type { Config, RequestInternal, Session } from "./types";
 
 export * from "./providers";
 export * from "./adapter";
@@ -27,7 +27,7 @@ export default (config: Config) => {
   return {
     getSession: async (req: RequestInternal) => {
       const context = getContext(req, config);
-      let session;
+      let session = null;
 
       if (context.session) {
         session = await context.session.get(context);
@@ -53,7 +53,9 @@ export default (config: Config) => {
         context.json(session);
       }
 
-      return context.state as typeof context.state & { data: User | undefined };
+      return context.state as typeof context.state & {
+        data: Session | null;
+      };
     },
 
     handler: async (req: RequestInternal) => {

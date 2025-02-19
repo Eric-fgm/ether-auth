@@ -23,8 +23,8 @@ const auth = expressAuth({
 server.use("/auth", auth.middleware);
 
 server.get("/auth/me", async (req, res) => {
-  const user = await auth.getSession(req, res);
-  return res.json(user);
+  const session = await auth.getSession(req, res);
+  return res.json(session?.user);
 });
 
 server.listen(port, () => {
