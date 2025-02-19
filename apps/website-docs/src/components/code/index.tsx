@@ -10,8 +10,8 @@ interface ChildrenProps {
 const STORAGE_TAB_KEY = "codeTab.framework";
 
 const libraries = {
-  [ExpressCode.name]: "Express",
-  [HonoCode.name]: "Hono",
+  ExpressCode: "Express",
+  HonoCode: "Hono",
 };
 
 /**
@@ -65,15 +65,14 @@ export function Code({ children }: ChildrenProps) {
           // @ts-expect-error: Hacky dynamic child wrangling
           const child = childs.find((c) => c?.props?.type === f);
 
-          console.log(child, childs, f);
-
           // @ts-expect-error: Hacky dynamic child wrangling
           return Object.keys(child?.props ?? {}).length ? (
             child
           ) : (
             <Tabs.Tab key={f}>
               <p className="rounded-lg bg-slate-100 p-6 font-semibold dark:bg-neutral-950">
-                {libraries[f]} not documented yet. Help us by contributing{" "}
+                {libraries[f as keyof typeof libraries]} not documented yet.
+                Help us by contributing{" "}
                 <a
                   className="underline"
                   target="_blank"
