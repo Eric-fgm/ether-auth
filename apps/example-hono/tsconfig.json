@@ -1,0 +1,9 @@
+{
+  "extends": "@ether-auth/typescript-config/base.json",
+  "compilerOptions": {
+    "lib": ["ES2015"],
+    "outDir": "./dist"
+  },
+  "exclude": ["node_modules"],
+  "include": ["."]
+}

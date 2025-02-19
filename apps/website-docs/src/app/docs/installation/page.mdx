@@ -1,0 +1,176 @@
+import { Steps } from "nextra/components";
+import { Code, ExpressCode, HonoCode } from "../../../components/code";
+
+# Installation
+
+## REST API
+
+<Steps>
+### Install the Package
+
+<Code>
+  <ExpressCode type="ExpressCode">
+    ```bash npm2yarn
+    npm install @ether-auth/express
+    ```
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+    ```bash npm2yarn
+    npm install @ether-auth/hono
+    ```
+  </HonoCode>
+</Code>
+
+### Set Environment Variables
+
+Create a `.env` file in the root of your project and add the environment variables, e.g.:
+
+```ts filename=".env"
+JWT_SECRET=
+SESSION_SECRET=
+// For Google OAuth
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_CALLBACK_URL=
+```
+
+### Configure
+
+Providers handle user authentication (e.g., Google, GitHub, Email/Password), while adapters manage how user data is stored (e.g., SQLite, PostgreSQL).
+
+<br />
+<p>
+  <strong>Providers</strong>
+</p>
+You can easily configure Ether Auth to use your favorite provider:
+
+<Code>
+  <ExpressCode type="ExpressCode">
+    ```ts filename="auth.ts"
+    import { expressAuth, googleProvider } from "@ether-auth/express";
+
+    export const auth = expressAuth({
+        providers: [
+            googleProvider({
+                clientId: 'your_client_id',
+                clientSecret: 'your_client_secrent',
+                callbackUrl: 'your_callback_url'
+            })
+        ]
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+    ```ts filename="auth.ts"
+    import { honoAuth, googleProvider } from "@ether-auth/hono";
+
+    export const auth = honoAuth({
+        providers: [
+            googleProvider({
+                clientId: 'your_client_id',
+                clientSecret: 'your_client_secrent',
+                callbackUrl: 'your_callback_url'
+            })
+        ]
+    })
+    ```
+
+  </HonoCode>
+</Code>
+
+<br />
+<p>
+  <strong>Adapters</strong>
+</p>
+
+You can easily configure Ether Auth to use your favorite database:
+
+<Code>
+  <ExpressCode type="ExpressCode">
+    ```ts filename="auth.ts"
+    import { expressAuth } from "@ether-auth/express";
+    import { sqliteAdapter } from "@ether-auth/sqlite";
+
+    export const auth = expressAuth({
+        //...
+        adapter: sqliteAdapter({ filename: "your_database.db" })
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+    ```ts filename="auth.ts"
+    import { honoAuth } from "@ether-auth/hono";
+    import { sqliteAdapter } from "@ether-auth/sqlite";
+
+    export const auth = honoAuth({
+        //...
+        adapter: sqliteAdapter({ filename: "your_database.db" })
+    })
+    ```
+
+  </HonoCode>
+</Code>
+
+<br />
+<p>
+  <strong>Usage</strong>
+</p>
+
+How to use it with your favorite library? It is easy:
+
+<Code>
+  <ExpressCode type="ExpressCode">
+    ```ts filename="index.ts"
+    import express from "express";
+    import { auth } from "./auth.ts";
+
+    const app = express();
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json());
+
+    app.use("/api/auth", auth.middleware);
+
+    app.listen(process.env.PORT);
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+    ```ts filename="index.ts"
+    import { serve } from "@hono/node-server";
+    import { Hono } from "hono";
+    import { auth } from "./auth.ts";
+
+    const app = new Hono();
+
+    app.use("/api/auth/*", auth.middleware);
+
+    serve({
+      fetch: app.fetch,
+      port: process.env.PORT,
+    });
+    ```
+
+  </HonoCode>
+</Code>
+
+### 🎉 That's it!
+
+You're all set! You can now integrate Ether Auth into your application. Head over to the basic usage section to learn how to sign in users with the auth instance.
+
+</Steps>
+
+## Client API
+
+<Steps>
+
+### Coming Soon
+
+The Client API will serve as the interface between the frontend and backend, allowing users to authenticate, manage sessions, and interact with protected resources.
+
+</Steps>

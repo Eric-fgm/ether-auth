@@ -1,0 +1,57 @@
+import { Code, ExpressCode, HonoCode } from "../../../components/code";
+
+# Hooks
+
+Hooks give you a way to access the lifecycle and execute custom logic at specific points. They enable you to modify or extend behavior without altering the core structure, making it easier to customize functionality.
+
+### Simple example
+
+Hooks run after an endpoint is executed:
+
+<Code>
+  <ExpressCode type="ExpressCode">
+  
+    ```ts filename="auth.ts"
+    import { expressAuth } from "@ether-auth/express";
+
+    export const auth = expressAuth({
+        //...
+        hooks: {
+          async oauth(context, user) {
+            console.log(user);
+          },
+          async providers(context) {
+            return [
+              ...context.providers,
+              { id: "provider", name: "Schrödinger's Provider" },
+            ];
+          },
+        }
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+
+    ```ts filename="auth.ts"
+    import { honoAuth } from "@ether-auth/hono";
+
+    export const auth = honoAuth({
+        //...
+        hooks: {
+          async oauth(context, user) {
+            console.log(user);
+          },
+          async providers(context) {
+            return [
+              ...context.providers,
+              { id: "provider", name: "Schrödinger's Provider" },
+            ];
+          },
+        }
+    })
+    ```
+
+  </HonoCode>
+</Code>

@@ -1,0 +1,67 @@
+import { Code, ExpressCode, HonoCode } from "../../../components/code";
+
+# Creating Database Adapter
+
+A database adapter is an abstraction layer that allows applications to interact with different databases in a consistent manner. Instead of writing raw SQL queries, an adapter provides a structured way to perform database operations like CRUD (Create, Read, Update, Delete), connection management, and query execution.
+
+<Code>
+  <ExpressCode type="ExpressCode">
+  
+    ```ts filename="auth.ts"
+    import { expressAuth, type Adapter } from "@ether-auth/express";
+
+    const myAdapter = (): Adapter => {
+        async createUser(payload) {},
+        async getUserBy(key, value) {},
+        async updateUser(id, payload) {},
+        async deleteUser(id) {},
+        async createAccount(payload>) {},
+        async getAccountBy(providerId, key, value) {},
+        async deleteAccount(id) {},
+        async createSession(payload) {},
+        async getSession(token) {},
+        async updateSession(token, payload) {},
+        async clearSession(token) {},
+        async createVerification(payload) {},
+        async getVerification(token) {},
+        async deleteVerification(token) {}
+    }
+
+    export const auth = expressAuth({
+        //...
+        adapter: myAdapter()
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+
+    ```ts filename="auth.ts"
+    import { honoAuth, type Adapter } from "@ether-auth/hono";
+
+    const myAdapter = (): Adapter => {
+        async createUser(payload) {},
+        async getUserBy(key, value) {},
+        async updateUser(id, payload) {},
+        async deleteUser(id) {},
+        async createAccount(payload>) {},
+        async getAccountBy(providerId, key, value) {},
+        async deleteAccount(id) {},
+        async createSession(payload) {},
+        async getSession(token) {},
+        async updateSession(token, payload) {},
+        async clearSession(token) {},
+        async createVerification(payload) {},
+        async getVerification(token) {},
+        async deleteVerification(token) {}
+    }
+
+    export const auth = honoAuth({
+        //...
+        adapter: myAdapter()
+    })
+    ```
+
+  </HonoCode>
+</Code>

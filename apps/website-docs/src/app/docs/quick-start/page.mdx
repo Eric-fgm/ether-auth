@@ -1,0 +1,85 @@
+import { Code, ExpressCode, HonoCode } from "../../../components/code";
+
+# Quick Start
+
+### Google OAuth and SQLite
+
+This quick start guide will help you set up Google OAuth authentication with SQLite using Node.js (Express.js or Hono.js).
+
+<Code>
+  <ExpressCode type="ExpressCode">
+    ```ts filename="auth.ts"
+    import { expressAuth, googleProvider } from "@ether-auth/express";
+    import { sqliteAdapter } from "@ether-auth/sqlite";
+
+    export const auth = expressAuth({
+        providers: [
+            googleProvider({
+                clientId: process.env.GOOGLE_CLIENT_ID,
+                clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+                callbackUrl: process.env.GOOGLE_CALLBACK_URL
+            })
+        ],
+        adapter: sqliteAdapter({ filename: process.env.SQLITE_DATABASE })
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+    ```ts filename="auth.ts"
+    import { honoAuth, googleProvider } from "@ether-auth/hono";
+    import { sqliteAdapter } from "@ether-auth/sqlite";
+
+    export const auth = honoAuth({
+        providers: [
+            googleProvider({
+                clientId: process.env.GOOGLE_CLIENT_ID,
+                clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+                callbackUrl: process.env.GOOGLE_CALLBACK_URL
+            })
+        ],
+        adapter: sqliteAdapter({ filename: process.env.SQLITE_DATABASE })
+    })
+    ```
+
+  </HonoCode>
+</Code>
+
+### Email & Password with Session
+
+This quick start guide will help you implement email and password authentication using sessions in a Node.js (Express.js or Hono.js).
+
+<Code>
+  <ExpressCode type="ExpressCode">
+    ```ts filename="auth.ts"
+    import { expressAuth, emailPasswordProvider } from "@ether-auth/express";
+
+    export const auth = expressAuth({
+        providers: [
+            emailPasswordProvider()
+        ],
+        session: {
+            secret: process.env.SESSION_SECRET
+        }
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+    ```ts filename="auth.ts"
+    import { honoAuth, emailPasswordProvider } from "@ether-auth/hono";
+
+    export const auth = honoAuth({
+        providers: [
+            emailPasswordProvider()
+        ],
+        session: {
+            secret: process.env.SESSION_SECRET
+        }
+    })
+    ```
+
+  </HonoCode>
+</Code>

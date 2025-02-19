@@ -1,0 +1,30 @@
+{
+  "name": "website-docs",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev -p 3002",
+    "lint": "next lint",
+    "check-types": "tsc --noEmit",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^15.1.6",
+    "nextra": "^4.2.12",
+    "nextra-theme-docs": "^4.2.12",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@ether-auth/eslint-config": "workspace:*",
+    "@ether-auth/typescript-config": "workspace:*",
+    "@next/eslint-plugin-next": "^15.1.6",
+    "@types/node": "^22.12.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "eslint": "^9.20.0",
+    "typescript": "5.7.3"
+  }
+}

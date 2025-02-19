@@ -1,0 +1,41 @@
+import { Code, ExpressCode, HonoCode } from "../../../components/code";
+
+# JWT
+
+JWT (JSON Web Token) is a stateless authentication mechanism where user data is encoded into a token instead of being stored on the server. When a user logs in, the server generates a JWT, which includes claims (e.g., user ID, role) and is signed with a secret key.
+
+### Configure
+
+Ether Auth allows you to configure JSON Web Token. You must set secret key.
+
+<Code>
+  <ExpressCode type="ExpressCode">
+  
+    ```ts filename="auth.ts"
+    import { expressAuth } from "@ether-auth/express";
+
+    export const auth = expressAuth({
+        //...
+        jwt: {
+            secret: process.env.JWT_SECRET,
+        }
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+
+    ```ts filename="auth.ts"
+    import { honoAuth } from "@ether-auth/hono";
+
+    export const auth = honoAuth({
+        //...
+        jwt: {
+            secret: process.env.JWT_SECRET,
+        }
+    })
+    ```
+
+  </HonoCode>
+</Code>

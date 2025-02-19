@@ -1,0 +1,75 @@
+:root {
+  --x-color-primary-50: #efedfb;
+  --x-color-primary-100: #efedfb;
+  --x-color-primary-400: #5b3cf3;
+  --x-color-primary-500: #5b3cf3;
+  --x-color-primary-600: #856fef;
+  --x-color-primary-800: #856fef;
+}
+
+.container {
+  padding: 48px 4%;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.chip {
+  margin-bottom: 10px;
+  padding: 5px 16px;
+  background: #5b3cf3;
+  color: #ffffff;
+  border-radius: 32px;
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.flex {
+  margin-top: 42px;
+  display: flex;
+  gap: 16px;
+}
+
+.btn-primary a {
+  display: block;
+  padding: 10px 24px;
+  cursor: pointer;
+  background: #5b3cf3;
+  color: #ffffff;
+  border-radius: 32px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.stand-out {
+  color: #856fef;
+}
+
+.btn-secondary a {
+  display: block;
+  padding: 10px 24px;
+  cursor: pointer;
+  border-radius: 32px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.main-heading {
+  font-size: 48px;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.275;
+}
+
+.main-paragraph {
+  margin-top: 20px;
+  text-align: center;
+  /* font-weight: 500; */
+  line-height: 1.6;
+  max-width: 600px;
+}

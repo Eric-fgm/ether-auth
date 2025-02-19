@@ -1,0 +1,59 @@
+import { Code, ExpressCode, HonoCode } from "../../../components/code";
+
+# Typescript
+
+TypeScript is a strongly typed superset of JavaScript that adds static typing, interfaces, and better tooling support while compiling to JavaScript. It helps catch errors at compile-time, improves code maintainability, and enhances developer experience.
+
+### Config
+
+It is recommend enabling strict mode in your TypeScript config file:
+
+```ts filename="tsconfig.json"
+    {
+      "compilerOptions": {
+          "strict": true
+      }
+    }
+```
+
+### Module Augmentation
+
+Ether Auth allows you to add additional fields to the objects.
+
+<Code>
+  <ExpressCode type="ExpressCode">
+  
+    ```ts filename="types.ts"
+    declare module "@ether-auth/express" {
+      export interface User {
+        additionalField1: string;
+        additionalField2: string;
+      }
+
+      export interface Account {
+        additionalField1: string;
+        additionalField2: string;
+      }
+    }
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+
+    ```ts filename="types.ts"
+    declare module "@ether-auth/hono" {
+      export interface User {
+        additionalField1: string;
+        additionalField2: string;
+      }
+
+      export interface Account {
+        additionalField1: string;
+        additionalField2: string;
+      }
+    }
+    ```
+
+  </HonoCode>
+</Code>

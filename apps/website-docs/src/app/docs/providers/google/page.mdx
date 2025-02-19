@@ -1,0 +1,45 @@
+import { Code, ExpressCode, HonoCode } from "../../../../components/code";
+
+# Google
+
+Google OAuth Provider allows users to log in to third-party applications using their Google account. It follows the OAuth 2.0 standard, ensuring secure access to Google services without sharing passwords.
+
+### How to use?
+
+Ether Auth allows you to configure Google Provider. You must set clientId, clientSecret and callbackUrl.
+
+<Code>
+  <ExpressCode type="ExpressCode">
+  
+    ```ts filename="auth.ts"
+    import { expressAuth, googleProvider } from "@ether-auth/express";
+
+    export const auth = expressAuth({
+        providers: [googleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            callbackUrl: process.env.GOOGLE_CALLBACK_URL
+        })],
+        adapter: //...
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+
+    ```ts filename="auth.ts"
+    import { honoAuth, googleProvider } from "@ether-auth/hono";
+
+    export const auth = honoAuth({
+        providers: [googleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            callbackUrl: process.env.GOOGLE_CALLBACK_URL
+        })],
+        adapter: //...
+    })
+    ```
+
+  </HonoCode>
+</Code>

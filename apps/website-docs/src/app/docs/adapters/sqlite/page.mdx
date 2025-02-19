@@ -1,0 +1,39 @@
+import { Code, ExpressCode, HonoCode } from "../../../../components/code";
+
+# SQLite
+
+An SQLite adapter allows applications to interact with an SQLite database using an abstraction layer. It simplifies database operations like querying, inserting, updating, and deleting records.
+
+### How to use?
+
+Ether Auth allows you to configure SQLite Adapter. You must install `@ether-auth/sqlite` depedency.
+
+<Code>
+  <ExpressCode type="ExpressCode">
+  
+    ```ts filename="auth.ts"
+    import { expressAuth, googleProvider } from "@ether-auth/express";
+    import { sqliteAdapter } from "@ether-auth/sqlite";
+
+    export const auth = expressAuth({
+        //...
+        adapter: sqliteAdapter({ filename: "database.db" })
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+
+    ```ts filename="auth.ts"
+    import { honoAuth, googleProvider } from "@ether-auth/hono";
+    import { sqliteAdapter } from "@ether-auth/sqlite";
+
+    export const auth = honoAuth({
+        //...
+        adapter: sqliteAdapter({ filename: "database.db" })
+    })
+    ```
+
+  </HonoCode>
+</Code>

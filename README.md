@@ -1,40 +1,74 @@
-# Turborepo kitchen sink starter
+# Ether Auth
 
-This Turborepo starter is maintained by the Turborepo core team.
+![License](https://img.shields.io/github/license/your-repo/ether-auth)
+![Version](https://img.shields.io/npm/v/ether-auth)
+![Build Status](https://img.shields.io/github/actions/workflow/status/your-repo/ether-auth/build.yml)
 
-This example also shows how to use [Workspace Configurations](https://turbo.build/repo/docs/core-concepts/monorepos/configuring-workspaces).
+A lightweight and secure authentication library for Node.js applications, providing JWT-based authentication, password hashing, and session management.
 
-## Using this example
+## Features
 
-Run the following command:
+- 🔒 Secure password hashing (bcrypt)
+- 🔑 JWT or Session based authentication
+- 🔄 Refresh token support
+- 🛡️ Middleware integration for Express and Hono
+- 📌 Easy customization
+
+## Installation
 
 ```sh
-npx create-turbo@latest -e kitchen-sink
+npm install ether-auth
 ```
 
-## What's inside?
+## Usage
 
-This Turborepo includes the following packages and apps:
+### Importing the Library
 
-### Apps and Packages
+```javascript
+import express from "express";
+import { expressAuth } from "@ether-auth/express";
 
-- `api`: an [Express](https://expressjs.com/) server
-- `storefront`: a [Next.js](https://nextjs.org/) app
-- `admin`: a [Vite](https://vitejs.dev/) single page app
-- `blog`: a [Remix](https://remix.run/) blog
-- `@repo/eslint-config`: ESLint configurations used throughout the monorepo
-- `@repo/jest-presets`: Jest configurations
-- `@repo/logger`: isomorphic logger (a small wrapper around console.log)
-- `@repo/ui`: a dummy React UI library (which contains `<CounterButton>` and `<Link>` components)
-- `@repo/typescript-config`: tsconfig.json's used throughout the monorepo
+const app = express();
 
-Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
+app.use(express.json());
+app.use(urlencoded({ extended: true }));
+app.use(
+  "/auth",
+  expressAuth({
+    providers: [...],
+    adapter: ...,
+    session: {
+      secret: proccess.env.SECRET,
+    },
+  }).middleware
+)
+```
 
-### Utilities
+### Protect Routes
 
-This Turborepo has some additional tools already setup for you:
+```javascript
+const { getSession } = expressAuth(...)
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Jest](https://jestjs.io) test runner for all things JavaScript
-- [Prettier](https://prettier.io) for code formatting
+app.get("/dashboard", async (req, res) => {
+  const { user } = await getSession(req, res);
+  ...
+});
+```
+
+## Configuration
+
+You can customize the authentication settings via environment variables:
+
+```env
+JWT_SECRET=your_secret_key
+TOKEN_EXPIRATION=1h
+BCRYPT_SALT_ROUNDS=10
+```
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

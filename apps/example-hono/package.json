@@ -1,0 +1,27 @@
+{
+  "name": "example-hono",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "tsup --watch --onSuccess \"node dist/index.cjs\"",
+    "build": "tsup",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src/ --max-warnings 0",
+    "test": "jest --detectOpenHandles"
+  },
+  "dependencies": {
+    "@ether-auth/hono": "workspace:*",
+    "@ether-auth/sqlite": "workspace:*",
+    "@hono/node-server": "^1.13.8",
+    "hono": "^4.7.1"
+  },
+  "devDependencies": {
+    "@ether-auth/eslint-config": "workspace:*",
+    "@ether-auth/typescript-config": "workspace:*",
+    "eslint": "^9.20.0",
+    "tsup": "^8.3.6",
+    "typescript": "5.7.3"
+  }
+}

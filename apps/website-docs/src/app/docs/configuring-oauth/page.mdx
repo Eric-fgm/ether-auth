@@ -1,0 +1,97 @@
+import { Code, ExpressCode, HonoCode } from "../../../components/code";
+
+# Configuring OAuth
+
+### Override provider config
+
+Overriding configurations can be useful when integrating with a specific OAuth provider (e.g., Google, Facebook, GitHub) or when adapting OAuth for custom needs.
+
+<Code>
+  <ExpressCode type="ExpressCode">
+  
+    ```ts filename="auth.ts"
+    import { expressAuth, googleProvider } from "@ether-auth/express";
+
+    export const auth = expressAuth({
+        providers: [{
+            ...googleProvider({
+                clientId: process.env.GOOGLE_CLIENT_ID,
+                clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+                callbackUrl: process.env.GOOGLE_CALLBACK_URL
+            }),
+            accessTokenUrl: "https://oauth2.googleapis.com/token"
+        }]
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+
+    ```ts filename="auth.ts"
+    import { honoAuth, googleProvider } from "@ether-auth/hono";
+
+    export const auth = honoAuth({
+        providers: [{
+            ...googleProvider({
+                clientId: process.env.GOOGLE_CLIENT_ID,
+                clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+                callbackUrl: process.env.GOOGLE_CALLBACK_URL
+            }),
+            accessTokenUrl: "https://oauth2.googleapis.com/token"
+        }]
+    })
+    ```
+
+  </HonoCode>
+</Code>
+
+### Create your own provider
+
+Creating your own OAuth provider involves setting up a system that allows other applications to authenticate users via your service, similar to how Google, Facebook, or GitHub act as OAuth providers.
+
+<Code>
+  <ExpressCode type="ExpressCode">
+  
+    ```ts filename="auth.ts"
+    import { expressAuth, type OAuthProvider } from "@ether-auth/express";
+
+    const myProvider = (): OAuthProvider => ({
+        authorizationUrl: "https://oauth2.example.com/authorize",
+        accessTokenUrl: "https://oauth2.example.com/token",
+        userInfoUrl: "https://oauth2.example.com/user-info",
+        callbackUrl: "http://localhost",
+        type: "oauth",
+        retrieveToken(code) {},
+        retrieveProfile(accessToken) {}
+    })
+
+    export const auth = expressAuth({
+        providers: [myProvider()]
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+
+    ```ts filename="auth.ts"
+    import { honoAuth, type OAuthProvider } from "@ether-auth/hono";
+
+    const myProvider = (): OAuthProvider => ({
+        authorizationUrl: "https://oauth2.example.com/authorize",
+        accessTokenUrl: "https://oauth2.example.com/token",
+        userInfoUrl: "https://oauth2.example.com/user-info",
+        callbackUrl: "http://localhost",
+        type: "oauth",
+        retrieveToken(code) {},
+        retrieveProfile(accessToken) {}
+    })
+
+    export const auth = honoAuth({
+        providers: [myProvider()]
+    })
+    ```
+
+  </HonoCode>
+</Code>

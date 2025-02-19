@@ -1,0 +1,39 @@
+import { Code, ExpressCode, HonoCode } from "../../../../components/code";
+
+# Email & Password
+
+An Email and Password Provider is a common authentication method where users sign up and log in using their email address and a password. This approach is widely used in web and mobile applications for secure user authentication.
+
+### How to use?
+
+Ether Auth allows you to configure Email & Password Provider.
+
+<Code>
+  <ExpressCode type="ExpressCode">
+  
+    ```ts filename="auth.ts"
+    import { expressAuth, emailPasswordProvider } from "@ether-auth/express";
+
+    export const auth = expressAuth({
+        providers: [emailPasswordProvider()],
+        mailer: //...
+        adapter: //...
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+
+    ```ts filename="auth.ts"
+    import { honoAuth, emailPasswordProvider } from "@ether-auth/hono";
+
+    export const auth = honoAuth({
+        providers: [emailPasswordProvider()],
+        mailer: //...
+        adapter: //...
+    })
+    ```
+
+  </HonoCode>
+</Code>

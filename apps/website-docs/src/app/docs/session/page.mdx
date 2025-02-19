@@ -1,0 +1,87 @@
+import { Code, ExpressCode, HonoCode } from "../../../components/code";
+
+# Session
+
+A session using cookies allows web applications to maintain user state across multiple requests. When a user logs in, a session ID is generated and stored in a cookie on the client’s browser. The server uses this session ID to retrieve user-specific data, ensuring continuity.
+
+### Database Table
+
+The session table stores the session data. The session table has the following fields:
+
+- `token`: The session token.
+- `userId`: The user id.
+- `expires`: The expiration timestamp.
+
+### Configure
+
+Ether Auth allows you to configure session. You can set required secret key, optional name and cookie options.
+
+<Code>
+  <ExpressCode type="ExpressCode">
+  
+    ```ts filename="auth.ts"
+    import { expressAuth } from "@ether-auth/express";
+
+    export const auth = expressAuth({
+        //...
+        session: {
+            secret: process.env.SESSION_SECRET,
+            cookie: {
+                maxAge: 7 * 24 * 3600
+            }
+        }
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+
+    ```ts filename="auth.ts"
+    import { honoAuth } from "@ether-auth/hono";
+
+    export const auth = honoAuth({
+        //...
+        session: {
+            secret: process.env.SESSION_SECRET,
+            cookie: {
+                maxAge: 7 * 24 * 3600
+            }
+        }
+    })
+    ```
+
+  </HonoCode>
+</Code>
+
+### Get Session
+
+To retrieve session of current user:
+
+<Code>
+  <ExpressCode type="ExpressCode">
+  
+    ```ts filename="index.ts"
+    import { auth } from "./auth.ts";
+
+    app.get('/', async (req, res) => {
+      const session = await auth.getSession(req, res);
+      return res.json(session);
+    })
+    ```
+
+  </ExpressCode>
+
+  <HonoCode type="HonoCode">
+
+    ```ts filename="index.ts"
+    import { auth } from "./auth.ts";
+
+    app.get('/', async (c) => {
+      const session = await auth.getSession(c);
+      return c.json(session);
+    })
+    ```
+
+  </HonoCode>
+</Code>
