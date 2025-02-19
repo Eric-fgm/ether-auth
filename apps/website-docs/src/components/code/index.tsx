@@ -76,7 +76,7 @@ export function Code({ children }: ChildrenProps) {
                 <a
                   className="underline"
                   target="_blank"
-                  href={`.../edit/main/docs/pages${pathname}.mdx`}
+                  href={`https://github.com/Eric-fgm/ether-auth/edit/main/docs/pages${pathname}.mdx`}
                   rel="noreferrer"
                 >
                   here
